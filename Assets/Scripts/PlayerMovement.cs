@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] Transform gun;
     
+    [SerializeField] GameObject leaveBehindWhenDead;
+
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
@@ -20,9 +23,11 @@ public class PlayerMovement : MonoBehaviour
     float gravityScaleAtStart;
 
     bool isAlive = true;
+    private GameObject pickups;
 
     void Start()
     {
+        pickups = GameObject.FindGameObjectWithTag("Pickups");
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
@@ -102,8 +107,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
+        
         if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
         {
+            var leaveBehind = Instantiate(leaveBehindWhenDead, gun.position, transform.rotation);
+            leaveBehind.transform.parent = pickups.transform;
             isAlive = false;
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;

@@ -13,6 +13,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
     
+    
+    
     void Awake()
     {
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
@@ -52,10 +54,12 @@ public class GameSession : MonoBehaviour
 
     void TakeLife()
     {
+        
         playerLives--;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
         livesText.text = playerLives.ToString();
+        
     }
 
     void ResetGameSession()
