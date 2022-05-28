@@ -12,9 +12,9 @@ public class GameSession : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
-    
-    
-    
+    private ScenePersist _scenePersist;
+
+
     void Awake()
     {
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
@@ -30,6 +30,7 @@ public class GameSession : MonoBehaviour
 
     void Start() 
     {
+        _scenePersist = FindObjectOfType<ScenePersist>();
         livesText.text = playerLives.ToString();
         scoreText.text = score.ToString();    
     }
@@ -62,9 +63,9 @@ public class GameSession : MonoBehaviour
         
     }
 
-    void ResetGameSession()
+    public void ResetGameSession()
     {
-        FindObjectOfType<ScenePersist>().ResetScenePersist();
+        _scenePersist.ResetScenePersist();
         SceneManager.LoadScene(0);
         Destroy(gameObject);
     }

@@ -24,9 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
     bool isAlive = true;
     private GameObject pickups;
+    private GameSession _gameSession;
 
     void Start()
     {
+        _gameSession = FindObjectOfType<GameSession>();
         pickups = GameObject.FindGameObjectWithTag("Pickups");
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -37,17 +39,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         if (!isAlive) { return; }
         Run();
         FlipSprite();
         ClimbLadder();
         Die();
+
+        
     }
 
     void OnFire(InputValue value)
     {
         if (!isAlive) { return; }
-        Instantiate(bullet, gun.position, transform.rotation);
+        _gameSession.ResetGameSession();
     }
     
     void OnMove(InputValue value)
@@ -115,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             isAlive = false;
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            _gameSession.ProcessPlayerDeath();
         }
     }
 

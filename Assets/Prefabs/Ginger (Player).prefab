@@ -191,12 +191,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 7
-  jumpSpeed: 20
+  jumpSpeed: 15
   climbSpeed: 5
   deathKick: {x: 20, y: 20}
   bullet: {fileID: 5450244551410949440, guid: 36191fa3857d39b428471cae03732f9f, type: 3}
   gun: {fileID: 6847005739859954167}
-  leaveBehindWhenDead: {fileID: 6229391455672694949, guid: 29cf7c4aab48b704aab0064e05495a46, type: 3}
+  leaveBehindWhenDead: {fileID: 4614414254700248877, guid: 01a399018e9dff9459ed9aa0164d4c31, type: 3}
 --- !u!61 &2631773049785510294
 BoxCollider2D:
   m_ObjectHideFlags: 0
