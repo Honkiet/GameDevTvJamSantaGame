@@ -15,7 +15,6 @@ public class CoinPickup : MonoBehaviour
         {
             wasCollected = true;
             FindObjectOfType<GameSession>().AddToScore(pointsForCoinPickup);
-            AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

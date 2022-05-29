@@ -30,7 +30,6 @@ public class GameSession : MonoBehaviour
 
     void Start() 
     {
-        _scenePersist = FindObjectOfType<ScenePersist>();
         livesText.text = playerLives.ToString();
         scoreText.text = score.ToString();    
     }
@@ -65,8 +64,13 @@ public class GameSession : MonoBehaviour
 
     public void ResetGameSession()
     {
-        _scenePersist.ResetScenePersist();
-        SceneManager.LoadScene(0);
+        FindObjectOfType<ScenePersist>().ResetScenePersist();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Destroy(gameObject);
+    }
+
+    public void ResetLives()
+    {
+        playerLives = 3;
     }
 }

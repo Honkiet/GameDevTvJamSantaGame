@@ -24,17 +24,17 @@ public class PlayerMovement : MonoBehaviour
 
     bool isAlive = true;
     private GameObject pickups;
-    private GameSession _gameSession;
 
     void Start()
     {
-        _gameSession = FindObjectOfType<GameSession>();
+     
         pickups = GameObject.FindGameObjectWithTag("Pickups");
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myFeetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myRigidbody.gravityScale;
+        
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value)
     {
         if (!isAlive) { return; }
-        _gameSession.ResetGameSession();
+        FindObjectOfType<GameSession>().ResetGameSession();
     }
     
     void OnMove(InputValue value)
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             isAlive = false;
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;
-            _gameSession.ProcessPlayerDeath();
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 
